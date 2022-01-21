@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/nav.ejs') %>
 <div class="container mt-5">
-  <form action="/posts/<%= post.id %>/edit" method="post" enctype="multipart/form-data">
+  <form action="/posts/<%= post.id %>/edit"  method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label class="font-weight-bold" for="title">Title</label>
       <input
@@ -21,6 +21,7 @@
         type="file"
         id="image"
         name="image"
+        required
       />
     </div>
     <div class="form-group">

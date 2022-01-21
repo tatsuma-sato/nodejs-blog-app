@@ -19,7 +19,11 @@ router.get("/:postId", postController.getPostById);
 
 router.get("/:postId/edit-post", postController.getEditPost);
 
-router.post("/:postId/edit", postController.postEditPost);
+router.post(
+  "/:postId/edit",
+  upload.single("image"),
+  postController.postEditPost
+);
 
 router.post("/:postId/delete", postController.postDeletePost);
 

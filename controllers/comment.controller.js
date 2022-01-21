@@ -2,13 +2,6 @@ const Post = require("../models/post.module");
 const Comment = require("../models/comment.model");
 const mongoose = require("mongoose");
 
-const getById = (postId) => {
-  return Post.findById(postId, (err, data) => {
-    if (err) console.log(err);
-    return data;
-  }).clone();
-};
-
 exports.postComment = async (req, res, next) => {
   let { name, comment } = req.body;
   const postId = req.params.postId;
@@ -38,7 +31,6 @@ exports.postComment = async (req, res, next) => {
 exports.getComments = (req, res, next) => {
   const postId = mongoose.Types.ObjectId(req.params.postId);
 
-  // Comment.find((err, data) => {
   Comment.find({ post: postId }, (err, data) => {
     if (err) console.log(err);
 

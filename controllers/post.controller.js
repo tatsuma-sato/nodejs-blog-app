@@ -35,11 +35,10 @@ exports.getPostById = async (req, res, next) => {
 };
 
 exports.postNewPost = async (req, res, next) => {
-
-  const { title, content, postId, } = req.body;
+  const { title, content, postId } = req.body;
   const imageData = {
     data: fs.readFileSync(
-      path.join(__dirname,"../public",'images',req.file.filename)
+      path.join(__dirname, "../public", "images", req.file.filename)
     ),
     contentType: "image/jpeg",
   };
@@ -71,12 +70,18 @@ exports.getEditPost = async (req, res, next) => {
 };
 
 exports.postEditPost = async (req, res, next) => {
-  const { title, imageUrl, content, postId } = req.body;
+  const { title, content, postId } = req.body;
 
+  const imageData = {
+    data: fs.readFileSync(
+      path.join(__dirname, "../public", "images", req.file.filename)
+    ),
+    contentType: "image/jpeg",
+  };
   const post = await getById(postId);
 
   post.title = title;
-  post.imageUrl = imageUrl;
+  post.imageData = imageData;
   post.content = content;
 
   await post.save();
