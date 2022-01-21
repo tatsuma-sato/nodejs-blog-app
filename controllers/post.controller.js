@@ -1,5 +1,7 @@
 const Post = require("../models/post.module");
 const Comment = require("../models/comment.model");
+const fs = require("fs");
+const path = require("path");
 
 const getById = (postId) => {
   return Post.findById(postId, (err, data) => {
@@ -33,9 +35,20 @@ exports.getPostById = async (req, res, next) => {
 };
 
 exports.postNewPost = async (req, res, next) => {
-  const { title, imageUrl, content, postId } = req.body;
 
-  const post = new Post({ title, imageUrl, content });
+  const { title, content, postId, } = req.body;
+  const imageData = {
+    data: fs.readFileSync(
+      path.join(__dirname,"../public",'images',req.file.filename)
+    ),
+    contentType: "image/jpeg",
+  };
+  // const image = new Image(imageData)
+  // await image.save()
+  // console.log(image);
+  // console.log(req.body);
+  // console.log(req.file);
+  const post = new Post({ title, imageData, content });
 
   try {
     await post.save();

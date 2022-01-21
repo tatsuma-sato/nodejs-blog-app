@@ -6,9 +6,9 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  imageUrl: {
-    type: String,
-    required: true,
+  imageData: {
+    data: Buffer,
+    contentType: String
   },
   content: {
     type: String,
@@ -46,13 +46,4 @@ postSchema.methods.dislikePost = function () {
   return this.save();
 };
 
-postSchema.methods.deleteCommentById = function (commentId) {
-  this.comments.filter((comment) => { 
-    console.log(comment);
-    console.log(commentId);
-    console.log(comment !== mongoose.Types.ObjectId(commentId));
-    return comment !== mongoose.Types.ObjectId(commentId);
-  });
-  return this.save();
-};
 module.exports = mongoose.model("Post", postSchema);

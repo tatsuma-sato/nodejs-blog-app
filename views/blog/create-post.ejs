@@ -1,8 +1,8 @@
 <%- include('../includes/head.ejs') %> <%- include('../includes/nav.ejs') %>
 <div class="container mt-5">
-  <form action="/posts/create" method="post">
+  <form action="/posts/create" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="title">Title</label>
+      <label class="font-weight-bold" for="title">Title</label>
       <input
         type="text"
         required
@@ -13,17 +13,16 @@
       />
     </div>
     <div class="form-group">
-      <label for="imageUrl">Top Image URL</label>
+      <label class="font-weight-bold" for="image">Top Image URL</label>
+      <br>
       <input
-        type="text"
-        name="imageUrl"
-        class="form-control"
-        id="imageUrl"
-        placeholder="Enter Image URL"
+        type="file"
+        name="image"
+        id="image"
       />
     </div>
     <div class="form-group">
-      <label for="content">Content</label>
+      <label class="font-weight-bold" for="content">Content</label>
       <textarea
         class="form-control"
         name="content"

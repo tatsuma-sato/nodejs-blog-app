@@ -6,9 +6,9 @@
   <div class="row">
     <% for(post of posts) { %>
     <div class="col-4 mb-5 d-flex">
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 18rem">
         <img
-          src="<%= post.imageUrl %>"
+          src="data:<%= post.imageData.contentType %>;base64,<%= post.imageData.data.toString('base64') %>"
           class="card-img-top"
           alt="<%= post.title %>"
         />
