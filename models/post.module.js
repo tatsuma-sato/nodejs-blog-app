@@ -8,7 +8,15 @@ const postSchema = new Schema({
   },
   imageData: {
     data: Buffer,
-    contentType: String
+    contentType: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  editDate: {
+    type: Date,
+    default: null,
   },
   content: {
     type: String,

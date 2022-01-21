@@ -42,11 +42,7 @@ exports.postNewPost = async (req, res, next) => {
     ),
     contentType: "image/jpeg",
   };
-  // const image = new Image(imageData)
-  // await image.save()
-  // console.log(image);
-  // console.log(req.body);
-  // console.log(req.file);
+
   const post = new Post({ title, imageData, content });
 
   try {
@@ -83,6 +79,7 @@ exports.postEditPost = async (req, res, next) => {
   post.title = title;
   post.imageData = imageData;
   post.content = content;
+  post.editDate = Date.now()
 
   await post.save();
   res.redirect("/posts");

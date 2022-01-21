@@ -1,9 +1,17 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/single-post.css" />
 <%- include('../includes/nav.ejs') %>
-<div class="container mt-5">
+<div class="container my-5">
   <div class="bg-light mx-5 px-3 py-3">
-    <h1 class="mx-2"><%= post.title %></h1>
+    <h1 class="mx-3"><%= post.title %></h1>
+    <p class="mx-3 font-weight-light" style="font-size: small">
+      <%= post.date.toLocaleString() %>
+    </p>
+    <% if(post.editDate) {%>
+    <p class="mx-3 font-weight-light" style="font-size: small">
+      Edited: <%= post.editDate.toLocaleString()%>
+    </p>
+    <% } %>
     <div class="text-center">
       <img
         src="data:<%= post.imageData.contentType %>;base64,<%= post.imageData.data.toString('base64') %>"
@@ -13,7 +21,7 @@
       />
     </div>
 
-    <p class="mx-3 my-3"><%= post.content %></p>
+    <p class="mx-3 my-4"><%= post.content %></p>
 
     <a href="/posts/<%= post.id %>/edit-post" class="btn ml-3 btn-secondary"
       >Edit</a

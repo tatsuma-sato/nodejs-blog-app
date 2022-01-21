@@ -30,7 +30,7 @@ router.post("/:postId/delete", postController.postDeletePost);
 router.post("/:postId/like", postController.postLikePost);
 router.post("/:postId/dislike", postController.postDislikePost);
 
-// comment handler
+// comment router
 router.post("/:postId/comment", commentController.postComment);
 
 router.get("/:postId/comments", commentController.getComments);
