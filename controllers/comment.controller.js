@@ -1,10 +1,23 @@
 const Post = require("../models/post.module");
 const Comment = require("../models/comment.model");
+const mongoose = require("mongoose");
+
+const getById = (postId) => {
+  return Post.findById(postId, (err, data) => {
+    if (err) console.log(err);
+    return data;
+  }).clone();
+};
 
 exports.postComment = async (req, res, next) => {
-  const { name, comment } = req.body;
-
+  let { name, comment } = req.body;
   const postId = req.params.postId;
+
+  if (!name) {
+    name = "unknown";
+  }
+
+  const updatedPost = await Post.findById(postId);
 
   const newComment = new Comment({
     name: name,
@@ -14,26 +27,19 @@ exports.postComment = async (req, res, next) => {
 
   await newComment.save();
 
-  const updatedPost = await Post.findById(postId);
-
   updatedPost.comments.push(newComment);
 
   await updatedPost.save((err, data) => {
     if (err) console.log(err);
-
-    res.redirect("/");
-    // res.render(`single-post/${postId}`, {
-    //   pageTitle: updatedPost.title,
-    //   post: data,
-    //   commnets: data.commnets,
-    // });
+    res.redirect(`/posts/${postId}`);
   });
 };
 
 exports.getComments = (req, res, next) => {
-  const postId = req.params.postId;
+  const postId = mongoose.Types.ObjectId(req.params.postId);
 
-  Comment.find((err, data) => {
+  // Comment.find((err, data) => {
+  Comment.find({ post: postId }, (err, data) => {
     if (err) console.log(err);
 
     res.render("blog/comments", {
@@ -44,11 +50,15 @@ exports.getComments = (req, res, next) => {
   });
 };
 
-exports.deleteComment = (req, res, next) => {
+exports.deleteComment = async (req, res, next) => {
   const { commentId, postId } = req.body;
 
   Comment.deleteOne({ id: commentId })
-    .then(() => {
+    .then(async () => {
+      const doc = await Post.findById(postId);
+      await doc.comments.pull({ _id: commentId });
+      await doc.save();
+
       res.redirect(`/posts/${postId}/comments`);
     })
     .catch((err) => {

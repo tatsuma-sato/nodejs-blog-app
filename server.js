@@ -15,7 +15,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.render("index");
 });
+
 app.use("/posts", router);
+
+app.get("*", (req, res) => {
+  res.status(404).render("404");
+});
 
 const PORT = process.env.PORT || 8000;
 

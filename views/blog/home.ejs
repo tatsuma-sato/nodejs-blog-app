@@ -1,28 +1,37 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/home.css" />
 <%- include('../includes/nav.ejs') %>
 <div class="container mt-5">
   <a href="/posts/create-post" class="btn btn-primary mb-4">Create New Post</a>
-
-  <div class="d-flex flex-row justfy-content-between flex-wrap">
+  <div class="row">
     <% for(post of posts) { %>
-
-    <div class="card h-100 mx-auto mb-5" style="width: 18rem">
-      <img
-        src="<%= post.imageUrl %>"
-        class="card-img-top"
-        alt="<%= post.title %>"
-      />
-      <div class="card-body">
-        <h5 class="card-title"><%= post.title %></h5>
-        <p class="card-text">
-          <% if(post.content.length > 20) {%> <%=
-          post.content.slice(0,50).concat('.....') %> <% }else{ %> <%=
-          post.content %> <% } %>
-        </p>
-        <a href="/posts/<%= post.id %>" class="btn btn-primary">Read More</a>
-        <a href="#" class="btn btn-success">Edit</a>
-        <a href="#" class="btn btn-danger">Delete</a>
+    <div class="col-4 mb-5 d-flex">
+      <div class="card" style="width: 18rem;">
+        <img
+          src="<%= post.imageUrl %>"
+          class="card-img-top"
+          alt="<%= post.title %>"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text">
+            <% if(post.content.length > 20) {%> <%=
+            post.content.slice(0,50).concat('.....') %> <% }else{ %> <%=
+            post.content %> <% } %>
+          </p>
+          <a href="/posts/<%= post.id %>" class="btn btn-primary">Read More</a>
+          <a href="/posts/<%= post.id %>/edit-post" class="btn btn-success"
+            >Edit</a
+          >
+          <form
+            action="/posts/<%= post.id %>/delete"
+            method="post"
+            style="display: inline-block"
+          >
+            <input type="hidden" name="postId" value="<%= post.id %>" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
       </div>
     </div>
 
