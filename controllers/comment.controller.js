@@ -42,14 +42,29 @@ exports.getComments = (req, res, next) => {
   });
 };
 
+// exports.deleteComment = async (req, res, next) => {
+//   const { commentId, postId } = req.body;
+
+//   Comment.deleteOne({ id: commentId })
+//     .then(async () => {
+//       const doc = await Post.findById(postId);
+//       await doc.comments.pull({ _id: commentId });
+//       await doc.save();
+
+//       res.redirect(`/posts/${postId}/comments`);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
+
 exports.deleteComment = async (req, res, next) => {
   const { commentId, postId } = req.body;
-
-  Comment.deleteOne({ id: commentId })
+  //changed to filter the _id property instead of id
+  Comment.deleteOne({ _id: commentId })
     .then(async () => {
-      const doc = await Post.findById(postId);
-      await doc.comments.pull({ _id: commentId });
-      await doc.save();
+      //refactored to using update than going through find --> pull --> save
+      await Post.updateOne({ _id: postId }, { $pull: { comments: commentId } });
 
       res.redirect(`/posts/${postId}/comments`);
     })

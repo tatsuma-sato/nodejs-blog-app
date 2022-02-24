@@ -13,15 +13,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.render("index",{
-    pageTitle: 'Home'
+  res.render("index", {
+    pageTitle: "Home",
   });
 });
 
 app.use("/posts", router);
 
 app.get("*", (req, res) => {
-  res.status(404).render("404");
+  res.status(404).render("404", {
+    pageTitle: "Error",
+  });
 });
 
 const PORT = process.env.PORT || 8000;

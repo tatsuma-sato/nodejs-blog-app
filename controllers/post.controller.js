@@ -79,7 +79,7 @@ exports.postEditPost = async (req, res, next) => {
   post.title = title;
   post.imageData = imageData;
   post.content = content;
-  post.editDate = Date.now()
+  post.editDate = Date.now();
 
   await post.save();
   res.redirect("/posts");
