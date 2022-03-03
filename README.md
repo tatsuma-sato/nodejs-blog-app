@@ -1,4 +1,4 @@
-jsNode.sj blog app
+# Node.js blog app
 
 ## Description
 
@@ -10,12 +10,12 @@ You can create, edit, delete, update a blog post which means this is a CRUD app
 **posts**
 
 1. /posts **GET**, to get post and post post
-2. /posts/create-post  **GET** to get the create post page
-3. /posts/create  **POST** to post a new blog post
+2. /posts/create-post **GET** to get the create post page
+3. /posts/create **POST** to post a new blog post
 4. /posts/:postId/edit-post **GET** to get the edit post page
-5. /posts/:postId/delete **POST** to delete the post 
-3. /posts/:postId/like **POST** to post like the blog post
-3. /posts/:postId/dislike **POST** to post dislike the blog post
+5. /posts/:postId/delete **POST** to delete the post
+6. /posts/:postId/like **POST** to post like the blog post
+7. /posts/:postId/dislike **POST** to post dislike the blog post
 
 **comments**
 
@@ -31,5 +31,3 @@ You can create, edit, delete, update a blog post which means this is a CRUD app
 ### Create a post page
 
 ![create post page](https://user-images.githubusercontent.com/82295664/155460269-a6406ca4-2d05-4617-ac56-e82a2973b777.png)
-
-
