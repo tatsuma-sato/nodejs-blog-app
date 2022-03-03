@@ -1,8 +1,8 @@
-# MERS stack blog app
+jsNode.sj blog app
 
 ## Description
 
-This is a MERN stack blog app WITHOUT authentication using MongoDB, Express, EJS, and Node.js
+This is Node.js blog app using MongoDB, Express, EJS, and Node.js
 You can create, edit, delete, update a blog post which means this is a CRUD app
 
 ## API
